@@ -28,8 +28,13 @@ public class ChestOrganizer extends JavaPlugin implements Listener {
 			Player player = (Player) event.getPlayer();
 			ItemStack mainHandItem = player.getInventory().getItemInMainHand();
 			
-//			getLogger().info();
-			if (mainHandItem.getType() == Material.STICK) {
+			String itemName = "";
+			try {
+				itemName = mainHandItem.getType().name().replace("_", " ").toLowerCase();
+				itemName = mainHandItem.getItemMeta().hasDisplayName() ? mainHandItem.getItemMeta().getDisplayName() : itemName;
+			}
+			catch (Exception e) {}
+			if (mainHandItem.getType() == Material.STICK && itemName.equalsIgnoreCase("MagIC")) {
 				Inventory inventory = event.getInventory();
 				List<ItemStack> inventoryList = new ArrayList<ItemStack>();
 				
